@@ -290,7 +290,7 @@ uint32_t const pulse[] PROGMEM = {
                           
 
 //Define pulse width (ms) of illumination during the "OFF" pulse (ON phase). Should be less than (interval-pulse)
-uint32_t const onPhaseOffPulseW[96] = {
+uint32_t const onPhaseOffPulseW[96] PROGMEM = {
 1000,  1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000,
 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000,
 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000,
@@ -585,7 +585,7 @@ void loop(){
                   setAll(i,phaseOFF);         //set LED OFF   
                 }
                 else if(useVarOffPulseIntensity){
-                  uint32_t frOffTime = onPhaseOffPulseW[i];
+                  uint32_t frOffTime = pgm_read_dword(onPhaseOffPulseW+i);
                   if(currPhase[i] == 2 && (currMillis-prevMillis-memPulse) < frOffTime){
                     ledState[i] = 1; 
                     uint16_t redInt = pgm_read_word_near(intensityOffPulse+i);

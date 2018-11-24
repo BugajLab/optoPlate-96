@@ -24,6 +24,7 @@ uint8_t ledState[chanNum/3] = {0}; //tracks the LED state (ON or OFF)
 uint32_t cycNum[chanNum/3] = {0}; //counts number of pulsing cycles
 Adafruit_TLC5947 tlc = Adafruit_TLC5947(NUM_TLC5974, clock, data, latch); //creates LED driver object
 
+
 //Define time variables for script
 //Add definitions as needed, following the provided syntax
 //Also make sure to add associated definition to "test mode" timing in Section 2
@@ -154,11 +155,11 @@ const uint8_t totPhaseNum = 3;
 };
 
 //Indicate whether using global (phase) intensities or individual(variable) intensities per each LED.
-//0 to use global intensities, 1 to use individual.  
+//0 to use global intensities, 1 to use intdividual.  
 //Can do this for ON intensities (define for ON pulse, OFF pulse), OFF intensities
 
-uint8_t useVarOnPulseIntensity = 1;
-uint8_t useVarOffPulseIntensity = 1;
+uint8_t useVarOnPulseIntensity = 0;
+uint8_t useVarOffPulseIntensity = 0;
 uint8_t useVarOffPhaseIntensity = 0;
 
 //Define illumination intensities by phase (global settings). 
@@ -318,7 +319,7 @@ uint32_t const pulse[] PROGMEM = {
                           
 
 //Define pulse width (ms) of illumination during the "OFF" pulse (ON phase). Should be less than (interval-pulse)
-uint32_t const onPhaseOffPulseW[96] = {
+uint32_t const onPhaseOffPulseW[96] PROGMEM= {
 1000,  1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000,
 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000,
 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000,
@@ -619,7 +620,7 @@ void loop(){
                   setAll(i,phaseOFF);         //set LED OFF   
                 }
                 else if(useVarOffPulseIntensity){
-                  uint32_t frOffTime = onPhaseOffPulseW[i];
+                  uint32_t frOffTime = pgm_read_dword(onPhaseOffPulseW+i);
                   if(currPhase[i] == 2 && (currMillis-prevMillis-memPulse) < frOffTime){
                     ledState[i] = 1; 
                     uint16_t blueInt = pgm_read_word_near(intensityOffPulse+i);
