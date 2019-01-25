@@ -530,13 +530,6 @@ void loop(){
                   setAll(i, intensities);
                   changed = 1;
                 }
-                else if (currPhase[i] == 1 && useVarOffPhaseIntensity){
-                  uint16_t redInt = pgm_read_word_near(intensityOffPhase+i);
-                  uint16_t fredInt = pgm_read_word_near(intensityOffPhase+i+96);
-                  uint16_t intensities[2] = {redInt, fredInt};
-                  setAll(i, intensities);
-                  changed = 1;
-                }
              else{
                setAll(i,phases[currPhase[i]]);
                changed = 1;
