@@ -494,11 +494,13 @@ void setup() {
     
   //set initial LED states to first pulse intensity
   for (int i = 0; i < chanNum/3; i++){
-    uint8_t mode = pgm_read_word_near(LEDmode+i);
-    setAll(i,phaseDELAY);
-    currPhase[i] = 1;
-    ledState[i] = 1; 
-    }
+   uint8_t mode = pgm_read_word_near(LEDmode+i);
+    if(mode != OFF){ 
+      setAll(i,phaseDELAY);
+      currPhase[i] = 1;
+      ledState[i] = 1; 
+      }
+  }
   tlc.write();
 
   //set the pin speed
