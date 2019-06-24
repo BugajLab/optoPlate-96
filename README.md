@@ -1,4 +1,4 @@
 # optoPlate-96
-The folders above contain all design files, documentation, and code for you to build and use your own optoPlate-96.
+This repository contains all design files, documentation, and code for you to build and use your own optoPlate-96.
 The optoPlates are a series of open-source devices for high-throughput, multi-color optogenetic experiments in microwell plates. Each well of a 96-well plate can be illuminated with up to 3 wavelengths of light, with independent control of illumination timing and intensity for each wavelength. We designed the optoPlates for robust operation in standard cell culture incubators, and for straightforward assembly and use. The optoPlate-96 can be assembled in a few hours with no specialized equipment, at a total cost of ~$600. These devices have enabled us to perform complex, quantitative, and reproducible optogenetic experiments over timescales ranging from minutes to weeks. We hope you will find them equally enabling.
 
